@@ -2,13 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import { AccountModule } from './account/account.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     // MongooseModule.forRoot('mongodb://root:password@localhost', {
     //   dbName: 'users',
     //   connectionName: 'users',
     // }),
+    AuthModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
@@ -17,7 +18,6 @@ import { AccountModule } from './account/account.module';
       dbName: 'users',
     }),
     UserModule,
-    AccountModule,
   ],
   controllers: [],
 

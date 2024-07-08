@@ -9,8 +9,8 @@ import {
   Post,
   Put,
   // Res,
-  UsePipes,
-  ValidationPipe,
+  // UsePipes,
+  // ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
@@ -20,25 +20,32 @@ import { User } from 'src/schemas/User.schema';
 export class UserController {
   constructor(private userService: UserService) {}
   @Post()
-  @UsePipes(new ValidationPipe())
+  // @UsePipes(new ValidationPipe())
   createUser(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    // res.status(HttpStatus.CREATED).send();
     return this.userService.createUser(createUserDto);
   }
 
   @Get()
-  getAllUser() {
+  async getAllUser() {
     // getAllUser(@Res() res: Response) {
     console.log(this.userService.getAllUser());
     // return res.status(HttpStatus.OK).json(this.userService.getAllUser());
     return this.userService.getAllUser();
   }
 
+  @Get('profile/:username')
+  async getProfileByUsername(@Param('username') username: string) {
+    return this.userService.getProfileByUsername(username);
+  }
+
   @Get(':id')
-  findUserById(@Param('id') id: string): Promise<User> {
-    console.log(this.userService.getUserById(id));
-    return this.userService.getUserById(id);
+  async getUserWithProfile(@Param('id') userId: string) {
+    return this.userService.getUserWithProfile(userId);
+  }
+
+  @Get('user/:id')
+  async getUserByUserId(@Param('id') userId: string) {
+    return this.userService.getUserByUserId(userId);
   }
 
   @Delete(':id')

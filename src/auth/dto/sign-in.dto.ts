@@ -1,20 +1,11 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 // import { IsUnique } from 'src/commons/decorators/is-unique.decorator';
 
-export class CreateUserDto {
+export class SignInDto {
   @IsString()
   @IsNotEmpty()
   username: string;
   @IsString()
   @IsNotEmpty()
   password: string;
-  @IsString()
-  @IsNotEmpty()
-  firstName: string;
-  @IsString()
-  @IsNotEmpty()
-  lastName: string;
-  @IsString()
-  bio: string;
-  avatarUrl: string;
 }
